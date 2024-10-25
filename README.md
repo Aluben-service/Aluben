@@ -10,7 +10,7 @@ The Aluben discord has:
 
 ### Features
 
--   Proxy
+-   Proxy(broken)
 -   Chatroom
 -   Tab cloak
 -   Games
