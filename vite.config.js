@@ -10,6 +10,10 @@ export default defineConfig({
 		partytownVite({
 			dest: join(__dirname, "static", "~partytown"),
 		}),
-		ChemicalVitePlugin({ meteor: false }),
-]
+		        ChemicalVitePlugin({
+            scramjet: false,
+            rammerhead: false,
+        }),
+
+	]
 });
