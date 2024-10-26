@@ -12,5 +12,4 @@
 	<script data-transport="epoxy" src="/chemical.js" defer></script>
 	<script src="/chemical.components.js" defer></script>
 	<link rel="stylesheet" href="/assets/css/styles.scss" />
-	<script src="localforage/dist/localforage.js"></script>
 </svelte:head>
