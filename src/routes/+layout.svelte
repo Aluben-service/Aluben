@@ -1,5 +1,5 @@
 <slot/>
-<!--
+
 <script>
     import { partytownSnippet } from '@builder.io/partytown/integration'
   </script>
@@ -25,4 +25,3 @@
     defer
 ></script>
   </svelte:head>
--->
