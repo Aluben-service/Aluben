@@ -11,11 +11,5 @@ export default defineConfig({
 			dest: join(__dirname, "static", "~partytown"),
 		}),
 		ChemicalVitePlugin({ meteor: false }),
-	],
-	// Optional: if you need to specify external dependencies for bundling
-	build: {
-		rollupOptions: {
-			external: ["express"], // Add other dependencies here if needed
-		},
-	},
+]
 });
