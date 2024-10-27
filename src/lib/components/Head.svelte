@@ -11,5 +11,5 @@
 	<script src="/assets/js/main.js" defer></script>
 	<script data-transport="epoxy" src="/chemical.js" defer></script>
 	<script src="/chemical.components.js" defer></script>
-	<link rel="stylesheet" href="/assets/css/styles.scss" />
+	<link rel="stylesheet" href="/assets/css/styles.css" />
 </svelte:head>

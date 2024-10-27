@@ -105,5 +105,5 @@
 </main>
 
 <style>
-	@import url("/assets/css/chat.scss");
+	@import url("/assets/css/chat.css");
 </style>

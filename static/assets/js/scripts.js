@@ -95,15 +95,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 	if (savedTheme === null || savedTheme === undefined) {
 		const link = document.createElement("link");
 		link.rel = "stylesheet";
-		link.href = "/assets/css/styles.scss";
+		link.href = "/assets/css/styles.css";
 	} else if (savedTheme === "Default") {
 		const link = document.createElement("link");
 		link.rel = "stylesheet";
-		link.href = "/assets/css/styles.scss";
+		link.href = "/assets/css/styles.css";
 	} else {
 		const link = document.createElement("link");
 		link.rel = "stylesheet";
-		link.href = `/assets/css/themes/${savedTheme}.scss`;
+		link.href = `/assets/css/themes/${savedTheme}.css`;
 		const themesDropdown = document.getElementById("themes");
 		themesDropdown.value = savedTheme;
 	}
