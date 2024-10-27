@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	if (savedTheme && savedTheme == "Default") {
 		const link = document.createElement("link");
 		link.rel = "stylesheet";
-		link.href = "/assets/css/styles.scss";
+		link.href = "/assets/css/styles.css";
 	} else if (savedTheme) {
 		let themesDropdown = document.getElementById("themes");
 		let themeurl = "/assets/css/themes/" + savedTheme + ".css";
