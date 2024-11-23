@@ -3,25 +3,38 @@ async function fixJSON(json) {
 		return callback && typeof callback === "function"
 			? callback(str)
 			: callback && Array.isArray(callback)
-			? callback.reduce((s, fn) => (fn ? fn(s) : s), str)
-			: str;
+				? callback.reduce((s, fn) => (fn ? fn(s) : s), str)
+				: str;
 	}
 
 	if (!json) return false;
 	try {
 		json = typeof json !== "string" ? JSON.stringify(json) : json;
 		json = bulkRegex(json, false, [
-			(str) => str.replace(/[\n\t]/g, "").replace(/,\}/g, "}").replace(/,\]/g, "]"),
 			(str) =>
-				str.split(/(?=[,\}\]])/g).map((s) => {
-					if (s.includes(":")) {
-						let [k, v] = s.split(/:(.+)/, 2).map((x) => x.trim());
-						k = bulkRegex(k, false, (p) => p.replace(/[^A-Za-z0-9\-_]/g, ""));
-						v = bulkRegex(v.slice(1, -1), false, [(p) => p.replace(/(["])/g, "\\$1")]);
-						s = `"${k}":"${v}"`;
-					}
-					return s;
-				}).join(""),
+				str
+					.replace(/[\n\t]/g, "")
+					.replace(/,\}/g, "}")
+					.replace(/,\]/g, "]"),
+			(str) =>
+				str
+					.split(/(?=[,\}\]])/g)
+					.map((s) => {
+						if (s.includes(":")) {
+							let [k, v] = s
+								.split(/:(.+)/, 2)
+								.map((x) => x.trim());
+							k = bulkRegex(k, false, (p) =>
+								p.replace(/[^A-Za-z0-9\-_]/g, ""),
+							);
+							v = bulkRegex(v.slice(1, -1), false, [
+								(p) => p.replace(/(["])/g, "\\$1"),
+							]);
+							s = `"${k}":"${v}"`;
+						}
+						return s;
+					})
+					.join(""),
 			(str) => str.replace(/(['"])?([a-zA-Z0-9\-_]+)(['"])?:/g, '"$2":'),
 		]);
 		return JSON.parse(json);
@@ -33,7 +46,9 @@ async function fixJSON(json) {
 // Fetch and display apps
 async function loadApps() {
 	try {
-		let apps = await fixJSON(await (await fetch("assets/json/apps.json")).json());
+		let apps = await fixJSON(
+			await (await fetch("assets/json/apps.json")).json(),
+		);
 		if (!apps) throw new Error("Failed to fix JSON");
 
 		apps.sort((a, b) => a.name.localeCompare(b.name));
@@ -64,7 +79,10 @@ async function loadApps() {
             `;
 			document.querySelector(".appcontainer").appendChild(appEl);
 
-			if ((await localforage.getItem(app.name)) === "pinned") document.querySelector(".pinned").appendChild(appEl.cloneNode(true));
+			if ((await localforage.getItem(app.name)) === "pinned")
+				document
+					.querySelector(".pinned")
+					.appendChild(appEl.cloneNode(true));
 		});
 	} catch (error) {
 		console.error(error);
@@ -159,21 +177,25 @@ function searchApps() {
 	// Get the search input and convert it to uppercase for case-insensitive search
 	var input = document.getElementById("searchInput");
 	var filter = input.value.toUpperCase();
-	
+
 	// Get all the app cards
 	var appCards = document.querySelectorAll(".appcard");
-	
+
 	// Loop through all app cards and hide those that don't match the search query
-	appCards.forEach(function(card) {
-	  var appName = card.querySelector(".appname").textContent || card.querySelector(".appname").innerText;
-	  var appCategory = card.getAttribute("data-category") || "";
-  
-	  // Check if the app name or category matches the search query
-	  if (appName.toUpperCase().indexOf(filter) > -1 || appCategory.toUpperCase().indexOf(filter) > -1) {
-		card.parentElement.style.display = ""; // Show matching cards
-	  } else {
-		card.parentElement.style.display = "none"; // Hide non-matching cards
-	  }
+	appCards.forEach(function (card) {
+		var appName =
+			card.querySelector(".appname").textContent ||
+			card.querySelector(".appname").innerText;
+		var appCategory = card.getAttribute("data-category") || "";
+
+		// Check if the app name or category matches the search query
+		if (
+			appName.toUpperCase().indexOf(filter) > -1 ||
+			appCategory.toUpperCase().indexOf(filter) > -1
+		) {
+			card.parentElement.style.display = ""; // Show matching cards
+		} else {
+			card.parentElement.style.display = "none"; // Hide non-matching cards
+		}
 	});
-  }
-  
+}
